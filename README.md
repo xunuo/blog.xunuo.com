@@ -1,2 +1,1 @@
-# blog.xunuo.com
-我的博客
+# THIS a git page project.
