@@ -1,1 +1,1 @@
-# THIS a git page project.
+> this a git page project, please switch to gh-pages branch.
