@@ -1,5 +1,4 @@
 title: Hello World
-category: hello
 ---
 
 <blockquote class="blockquote-center">
@@ -8,4 +7,12 @@ category: hello
 
 <!--more-->
 
-# 其它内容
+
+> 其它内容
+
+
+````js
+    var snow = function(){
+        alert(1);
+    }
+````

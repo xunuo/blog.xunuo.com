@@ -3,11 +3,12 @@ var gulp = require('gulp'),
     shell = require('gulp-shell')
     ;
 
+var serverPort = 1234;
 /**
  * 运行服务
  */
 gulp.task('server', shell.task([
-  'hexo server -p 1234'
+  'hexo server -p ' + serverPort
 ]))
 
 /**
@@ -35,6 +36,23 @@ gulp.task('watch_config', function() {
       livereload.changed(consoleInfo);
   });
 });
+
+
+/**
+ * 清理
+ */
+gulp.task('clean', shell.task([
+  'kill -9 $(lsof -i:' + serverPort + ' |awk \'{print $2}\' | tail -n 2)',
+  'hexo clean',
+  'rm -rf .deploy_git'
+]));
+
+/**
+ * 终止残余服务
+ */
+gulp.task('kill-server', shell.task([
+  'kill -9 $(lsof -i:' + serverPort + ' |awk \'{print $2}\' | tail -n 2)'
+]));
 
 
 /**
