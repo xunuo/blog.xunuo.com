@@ -1,5 +1,12 @@
 > The real things in the `gh-pages` branch.
->
 
-> publish:
-````hexo d -g````
+
+> watch / server / publish:
+
+````gulp server````
+
+````gulp watch_source_themes````
+
+````gulp watch_config````
+
+````gulp publish````

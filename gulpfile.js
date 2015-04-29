@@ -20,7 +20,7 @@ gulp.task('watch_source_themes', function() {
       setTimeout(function(){
           var consoleInfo = event.path.replace(__dirname,'');
           livereload.changed(consoleInfo);
-      },600);
+      },1000);
   });  
 });
 
