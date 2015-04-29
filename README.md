@@ -1,1 +1,1 @@
-> Everything in gh-pages branch.
+> The real things in the `gh-pages` branch.
