@@ -1,2 +1,3 @@
 > The real things in the `gh-pages` branch.  
-> ( watch / server / publish / clean / kill with Gulp! )
+> `add-new-blog` / `add-new-page` / `watch-source-themes` / `watch-config` / `server` / `kill-server` / `publish` / `clean` / with Gulpfile.js!  
+> One Key done. this is awesome!

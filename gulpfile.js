@@ -4,6 +4,21 @@ var gulp = require('gulp'),
     ;
 
 var serverPort = 1234;
+
+/**
+ * 新增文章
+ */
+gulp.task('add-new-blog', shell.task([
+  'hexo new page this-is-a-new-blog'
+]))
+
+/**
+ * 新增页面 (to source root base)
+ */
+gulp.task('add-new-page', shell.task([
+  'hexo new page "this-is-a-new-page"'
+]))
+
 /**
  * 运行服务
  */
