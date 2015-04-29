@@ -3,16 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
-description:
-author: John Doe
+title: Xunuo's Blog
+subtitle: 许诺
+description: aiLynn
+author: xunuo
+email: i@xunuo.com
 language:
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://blog.xunuo.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -67,4 +68,12 @@ theme: landscape
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: git
+  branch: gh-pages
+  repo: git@github.com:xunuo/blog.xunuo.com.git
+  message : 'Blog updated: {{ now("YYYY-MM-DD HH:mm:ss") }}'
+
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
