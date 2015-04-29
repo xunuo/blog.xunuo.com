@@ -10,12 +10,15 @@ author: xunuo
 email: i@xunuo.com
 language:
 timezone:
+language: zh-Hans
+
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://blog.xunuo.com
 root: /
-permalink: :year/:month/:day/:title/
+#permalink: :year/:month/:day/:title/
+permalink: :title/
 permalink_defaults:
 
 # Directory
@@ -27,7 +30,7 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 # 跳过某些文件的渲染
-skip_render: _posts/hello-world.md
+skip_render:
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -78,20 +81,3 @@ feed:
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
 theme: next
-
-## 主题相关配置
-# 菜单配置
-menu:
-  home: /
-  archives: /archives
-  categories: /categories
-  tags: /tags
-#  about: /about
-
-language: zh-Hans
-
-rss:
-
-highlight_theme: night
-
-

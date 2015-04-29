@@ -9,14 +9,14 @@ var serverPort = 1234;
  * 新增文章
  */
 gulp.task('add-new-blog', shell.task([
-  'hexo new page this-is-a-new-blog'
+  'hexo new this-is-a-new-blog'
 ]))
 
 /**
  * 新增页面 (to source root base)
  */
 gulp.task('add-new-page', shell.task([
-  'hexo new page "this-is-a-new-page"'
+  'hexo new page this-is-a-new-page'
 ]))
 
 /**
@@ -45,7 +45,7 @@ gulp.task('watch_source_themes', function() {
  */
 gulp.task('watch_config', function() {
   livereload.listen();
-  gulp.watch(['_config.yml'], function(event){
+  gulp.watch(['_config.yml','*/_config.yml'], function(event){
       console.log('[!] Config changed:\n');
       var consoleInfo = event.path.replace(__dirname,'');
       livereload.changed(consoleInfo);
