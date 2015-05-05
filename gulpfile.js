@@ -55,7 +55,7 @@ gulp.task('watch_config', function() {
 
 
 /**
- * 清理
+ * 清理生成临时文件及中断当前运行服务的端口
  */
 gulp.task('clean', shell.task([
   'kill -9 $(lsof -i:' + serverPort + ' |awk \'{print $2}\' | tail -n 2)',
