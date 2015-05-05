@@ -1,9 +1,10 @@
 var gulp = require('gulp'),
     livereload = require('gulp-livereload'),
-    shell = require('gulp-shell')
+    shell = require('gulp-shell'),
+    serverPort = 1234,
+    enConfigString = ' --config _config-en.yml',
+    cnConfigString = ' --config _config-cn.yml'
     ;
-
-var serverPort = 1234;
 
 /**
  * 新增文章
@@ -73,8 +74,19 @@ gulp.task('kill-server', shell.task([
 /**
  * 发布上线
  */
-gulp.task('publish', shell.task([
-  'hexo d -g'
+gulp.task('publish-all',['publish-to-cn'],shell.task([
+  'echo "正在推送到 Github Pages ..."',
+  'hexo d -g' + enConfigString,
+  'echo "已推送到 Github Pages。"'
+]))
+
+/**
+ * 同步到Gitcafe
+ */
+gulp.task('publish-to-cn', shell.task([
+  'echo "正在推送到 Gitcafe Pages ..."',
+  'hexo d -g' + cnConfigString,
+  'echo "已推送到 Gitcafe Pages。"'
 ]))
 
 
