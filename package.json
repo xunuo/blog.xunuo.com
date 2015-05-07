@@ -21,7 +21,6 @@
     "hexo-server": "^0.1.2"
   },
   "devDependencies": {
-    "gulp-livereload": "^3.8.0",
     "gulp-shell": "^0.4.1"
   }
 }
