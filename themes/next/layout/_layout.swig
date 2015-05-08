@@ -6,6 +6,7 @@
 </head>
 
 <body>
+{{config.title}}
   <div class="container one-column {% block page_class %}{% endblock %}">
 
 
