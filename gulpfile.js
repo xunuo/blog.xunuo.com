@@ -57,11 +57,11 @@ gulp.task('PP',shell.task([
     
   'echo "正在推送到 Github Pages ..."',
   'hexo d -g' + enConfigString,
-  'echo "成功推送到 Github Pages。"',
+  'echo "成功推送到 Github Pages。"'
     
-  'echo "正在推送到 Gitcafe Pages ..."',
-  'hexo d -g' + cnConfigString,
-  'echo "成功推送到 Gitcafe Pages。"'
+  //'echo "正在推送到 Gitcafe Pages ..."',
+  //'hexo d -g' + cnConfigString,
+  //'echo "成功推送到 Gitcafe Pages。"'
     
 ]))
 

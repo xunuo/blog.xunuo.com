@@ -7,9 +7,7 @@
 
 <body>
 
-
   <div class="container one-column {% block page_class %}{% endblock %}">
-
 
     <div id="header" class="header">
       <div class="header-inner">
@@ -24,7 +22,7 @@
         </div>
       </div>
 
-      {% block sidebar %}{% endblock %}
+      {#{% block sidebar %}{% endblock %}#}
     </div>
 
     <div id="footer" class="footer">
@@ -33,7 +31,7 @@
       </div>
     </div> 
 
-    <div class="back-to-top"></div> 
+    {#<div class="back-to-top"></div> #}
   </div>
 
   {#<script type="text/javascript" src="{{ url_for(theme.vendors) }}/jquery/index.js?v=2.1.3"></script>#}
