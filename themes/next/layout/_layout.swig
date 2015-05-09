@@ -6,6 +6,8 @@
 </head>
 
 <body>
+
+
   <div class="container one-column {% block page_class %}{% endblock %}">
 
 
@@ -29,9 +31,9 @@
       <div class="footer-inner">
         {% include '_partials/footer.swig' %}
       </div>
-    </div>
+    </div> 
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top"></div> 
   </div>
 
   {#<script type="text/javascript" src="{{ url_for(theme.vendors) }}/jquery/index.js?v=2.1.3"></script>#}
