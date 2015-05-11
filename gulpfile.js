@@ -27,7 +27,7 @@ gulp.task('server', function (cb) {
     
   console.log('启动服务 : "http://localhost:' + serverPort + '"');
     
-  exec('hexo server -p ' + serverPort);
+  exec('hexo server -p ' + serverPort + enConfigString);
     
   // 等待服务启动打开浏览器
   setTimeout(function(){

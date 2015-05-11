@@ -10,6 +10,7 @@ author: xunuo
 email: i@xunuo.com
 language:
 timezone:
+#language: default
 language: zh-Hans
 
 
