@@ -62,9 +62,7 @@ gulp.task('clean', shell.task([
 // 'PP' == 'push-and-publish'
 gulp.task('PP',shell.task([
   
-  'echo "PUSH变更到仓库..."',
-  'git add . && git commit -a -m "update" && git push',
-  'echo "PUSH成功。"',
+
     
   'echo "正在推送到 Github Pages ..."',
   'hexo d -g' + enConfigString,
@@ -72,7 +70,11 @@ gulp.task('PP',shell.task([
     
   'echo "正在推送到 Gitcafe Pages ..."',
   'hexo d -g' + cnConfigString,
-  'echo "成功推送到 Gitcafe Pages。"'
+  'echo "成功推送到 Gitcafe Pages。"',
+    
+  'echo "PUSH变更到仓库..."',
+  'git add . && git commit -a -m "update" && git push',
+  'echo "PUSH成功。"'
     
 ]))
 
