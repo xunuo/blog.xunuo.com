@@ -61,8 +61,6 @@ gulp.task('clean', shell.task([
  */
 // 'PP' == 'push-and-publish'
 gulp.task('PP',shell.task([
-  
-
     
   'echo "正在推送到 Github Pages ..."',
   'hexo d -g' + enConfigString,
