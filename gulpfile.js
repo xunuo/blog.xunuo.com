@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
     shell = require('gulp-shell'),
+    exec = require('child_process').exec,
     serverPort = 1234,
     enConfigString = ' --config _config-en.yml',
     cnConfigString = ' --config _config-cn.yml'
@@ -22,9 +23,20 @@ gulp.task('add-new-page', shell.task([
 /**
  * 运行服务
  */
-gulp.task('server', shell.task([
-  'hexo server -p ' + serverPort
-]));
+gulp.task('server', function (cb) {
+    
+  console.log('启动服务 : "http://localhost:' + serverPort + '"');
+    
+  exec('hexo server -p ' + serverPort);
+    
+  // 等待服务启动打开浏览器
+  setTimeout(function(){
+      exec('open -a Google\\ Chrome "http://localhost:' + serverPort + '"', function (err, stdout, stderr) {
+        cb(err);
+      });
+  },3000);
+    
+})
 
 /**
  * 终止残余服务
@@ -32,7 +44,6 @@ gulp.task('server', shell.task([
 gulp.task('kill-server', shell.task([
   'kill -9 $(lsof -i:' + serverPort + ' |awk \'{print $2}\' | tail -n 2)'
 ]));
-
 
 
 /**

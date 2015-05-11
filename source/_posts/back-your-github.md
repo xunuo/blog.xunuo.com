@@ -2,9 +2,8 @@ title: Github也可能会坏，别忘了备份仓库。
 date: 2015-04-29 23:20:11
 ---
 
-<blockquote class="blockquote-center">
-数据无价
-</blockquote>
+<blockquote class="blockquote-center">数据无价</blockquote>
+
 
 <!-- <img src="/statics/back-your-github-1.png" class="full-image" /> -->
 ![](/statics/back-your-github-1.png)
