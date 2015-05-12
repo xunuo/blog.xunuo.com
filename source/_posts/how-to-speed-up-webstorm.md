@@ -1,8 +1,7 @@
 title: 如何优化蜗牛一般的WEBSTORM
 date: 2015-04-30 10:20:11
-tags:
-- webstorm
-- 提速
+category: 开发者工具
+tags: [IDE, webstorm, 提速]
 ---
 
 ![](/statics/how-to-speed-up-webstorm.png)
