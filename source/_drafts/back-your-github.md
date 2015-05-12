@@ -2,6 +2,7 @@ title: Github也可能会坏，别忘了备份仓库。
 date: 2015-04-29 23:20:11
 category: 开发者工具
 tags: [Git,备份]
+layout: draft
 ---
 
 <blockquote class="blockquote-center">数据无价</blockquote>
