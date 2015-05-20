@@ -1,12 +1,9 @@
-<div class="copyright">
-  {% set current = date(Date.now(), "YYYY") %}
-  &copy; &nbsp; {% if theme.since and theme.since != current %} {{ theme.since }} - {% endif %}
-  {{ current }}
-  {#<span class="with-love">#}
-    {#<i class="icon-heart"></i>#}
-  {#</span>#}
-  <span class="author">{{ config.author }}</span>
-</div>
+{#<div class="copyright">#}
+  {#{% set current = date(Date.now(), "YYYY") %}#}
+  {#&copy; &nbsp; {% if theme.since and theme.since != current %} {{ theme.since }} - {% endif %}#}
+  {#{{ current }}#}
+  {#<span class="author">{{ config.author }}</span>#}
+{#</div>#}
 
 <!--
 <div class="powered-by">
@@ -21,4 +18,9 @@
 </div>
 -->
 
-{% block footer %}{% endblock %}
+{% block footer %}
+
+
+<a href="https://github.com/xunuo">My Github</a>
+
+{% endblock %}

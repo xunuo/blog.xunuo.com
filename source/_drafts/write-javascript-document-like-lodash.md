@@ -4,6 +4,4 @@ category: 开发者工具
 tags: [docup, 书写文档, javascript]
 ---
 
-http://backbonejs.org/
-
-https://lodash.com/docs
+![](/statics/write-javascript-document-like-lodash/1.jpg)

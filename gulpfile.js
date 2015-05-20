@@ -2,6 +2,7 @@ var gulp = require('gulp'),
     shell = require('gulp-shell'),
     exec = require('child_process').exec,
     serverPort = 1234,
+    localConfigString = ' --config _config-cn.yml --debug --draft',
     enConfigString = ' --config _config-en.yml',
     cnConfigString = ' --config _config-cn.yml'
     ;
@@ -10,14 +11,14 @@ var gulp = require('gulp'),
  * 新增文章
  */
 gulp.task('add-new-blog', shell.task([
-  'hexo new this-is-a-new-blog'
+  'hexo new new-blog'
 ]));
 
 /**
  * 新增页面 (to source root base)
  */
 gulp.task('add-new-page', shell.task([
-  'hexo new page this-is-a-new-page'
+  'hexo new page new-page'
 ]));
 
 /**
@@ -27,7 +28,7 @@ gulp.task('server', function (cb) {
     
   console.log('启动服务 : "http://localhost:' + serverPort + '"');
     
-  exec('hexo server -p ' + serverPort + enConfigString);
+  exec('hexo server -p ' + serverPort + localConfigString);
     
   // 等待服务启动打开浏览器
   setTimeout(function(){

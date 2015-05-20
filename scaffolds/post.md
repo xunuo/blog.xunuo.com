@@ -1,4 +1,11 @@
 title: {{ title }}
 date: {{ date }}
-tags:
+category: 
+tags: []
 ---
+
+{% asset_img cover.png %}
+
+<!--more-->
+
+text...
