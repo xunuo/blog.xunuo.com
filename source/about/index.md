@@ -2,4 +2,4 @@ title: "about"
 date: 2015-04-29 19:37:57
 ---
 
-starcraft / javascript / au
+> 简单来说，就是一个喜欢玩星际的前端工程师。

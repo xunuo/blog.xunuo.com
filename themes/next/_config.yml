@@ -2,7 +2,7 @@ menu:
   home: /
   categories: /categories
   archives: /archives
-  tags: /tags
+#  tags: /tags
   about: /about
 
 # Place your favicon.ico to /source directory.
