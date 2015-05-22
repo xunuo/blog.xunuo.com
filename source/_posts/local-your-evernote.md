@@ -1,6 +1,6 @@
 title: 一只不会动的大象 - 如何把你的印象笔记变成本地版。
 category: 工具
-tags: [笔记, 技巧, evernote]
+tags: [印象笔记, 技巧, evernote]
 ---
 
 {% asset_img 3.jpg %}
