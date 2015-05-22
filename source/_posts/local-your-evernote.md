@@ -77,6 +77,6 @@ ln -s ~/CloudDrive/evernote ~/Library/Application\ Support/com.evernote.Evernote
 
 ---
 
-OK，恭喜你，现在你终于有了一头“不能动”的大象，再也不会走私你的数据啦 :)
+OK，恭喜你，现在你终于有了一头“不能动”的大象，再也不会走私你的数据啦 :) 
 
-![](2.jpg)
+![不能动的evernote](2.jpg)
