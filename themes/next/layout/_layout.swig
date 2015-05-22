@@ -46,7 +46,8 @@
   {#{% block script_extra %}{% endblock %}#}
 
   {#{% include '_scripts/mathjax.swig' %}#}
-  {#{% block comment_system %}{% endblock %}#}
+  
+  {% block comment_system %}{% endblock %}
 
   {#{% include '_scripts/analytics/google-analytics.swig' %}#}
 </body>
