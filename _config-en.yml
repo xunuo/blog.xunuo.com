@@ -82,3 +82,6 @@ feed:
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
 theme: next
+
+# 多说账号
+duoshuo_shortname: xunuo
