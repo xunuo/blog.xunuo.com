@@ -27,7 +27,7 @@
 
     <div id="footer" class="footer">
       <div class="footer-inner">
-        {% include '_partials/footer.swig' %}
+        {% include '_partials/footer.swig' %} 
       </div>
     </div> 
 
