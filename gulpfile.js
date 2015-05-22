@@ -35,7 +35,7 @@ gulp.task('server', function (cb) {
       exec('open -a Google\\ Chrome "http://localhost:' + serverPort + '"', function (err, stdout, stderr) {
         cb(err);
       });
-  },3000);
+  },5000);
     
 })
 
@@ -62,6 +62,9 @@ gulp.task('clean', shell.task([
  */
 // 'PP' == 'push-and-publish'
 gulp.task('PP',shell.task([
+    
+  'git config user.name "xunuo"',
+  'git config user.email "i@xunuo.com"',
 
   'hexo clean',
     

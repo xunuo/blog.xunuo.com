@@ -21,6 +21,6 @@
 {% block footer %}
 
 
-<a href="https://github.com/xunuo">My Github</a>
+<a href="https://github.com/xunuo">My Github</a> | <a href="atom.xml">SSL</a>
 
 {% endblock %}
