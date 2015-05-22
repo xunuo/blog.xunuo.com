@@ -60,7 +60,7 @@ tags: [笔记, 技巧, evernote]
 
 ### 更高级的用法
 
-如果有信得过的云存储产品，比如公司自己使用的云盘，也可以通过软链接的方式将印象笔记的存储文件夹映射到云盘的一个文件夹，通过这种桥接方式重新获得印象笔记的多终端共享功能。
+如果你需要备份数据或有信得过的云存储产品，比如公司自己使用的云盘，也可以通过软链接的方式将印象笔记的存储文件夹映射到云盘的一个文件夹，通过这种桥接方式重新获得印象笔记的多终端共享功能。
 
 MAC下印象笔记的本地存储路径为：
 ```
@@ -68,7 +68,7 @@ MAC下印象笔记的本地存储路径为：
 ```
 如果你的云盘目录是 `~/CloudDrive/`，那么可以通过如下语句进行映射：
 ```
-ln -s ~/CloudDrive/evernote ~/Library/Application\ Support/com.evernote.Evernote
+ln -s ~/Library/Application\ Support/com.evernote.Evernote ~/CloudDrive/evernote
 ```
 
 接着，再其它的设备上也如此设置即可。
