@@ -63,8 +63,8 @@ gulp.task('clean', shell.task([
 // 'PP' == 'push-and-publish'
 gulp.task('PP',shell.task([
     
-  'git config user.name "xunuo"',
-  'git config user.email "i@xunuo.com"',
+  'git config --global user.name "xunuo"',
+  'git config --global user.email "i@xunuo.com"',
 
   'hexo clean',
     
@@ -80,7 +80,10 @@ gulp.task('PP',shell.task([
     
   'echo "PUSH变更到仓库..."',
   'git add . && git commit -a -m "update" && git push',
-  'echo "PUSH成功。"'
+  'echo "PUSH成功。"',
+    
+  'git config --unset --global user.name',
+  'git config --unset --global user.email',
     
 ]))
 
