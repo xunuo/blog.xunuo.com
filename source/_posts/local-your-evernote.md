@@ -71,7 +71,7 @@ MAC下印象笔记的本地存储路径为：
 ln -s ~/Library/Application\ Support/com.evernote.Evernote ~/CloudDrive/evernote
 ```
 
-接着，再其它的设备上也如此设置即可。
+接着，在其它的设备上也如此设置即可。
 
 > 注意：命令中的空格需要使用“\”转义，如 `Application\ Support`
 
