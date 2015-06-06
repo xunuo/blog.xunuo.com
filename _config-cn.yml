@@ -31,7 +31,7 @@ code_dir: downloads/code
 i18n_dir: :lang
 # 跳过某些文件的渲染
 skip_render:
-
+ 
 # Writing
 new_post_name: :title.md # File name of new posts
 default_layout: post
