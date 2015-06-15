@@ -1,0 +1,327 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+    <meta name="description" content="aiLynn" />
+
+
+
+  <meta name="keywords" content="CSS，预编译，翻译,webpack," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Xunuo's Blog" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+
+
+
+
+  <title> 「译」- 使用Webpack更加智能的预编译CSS // Xunuo's Blog </title>
+</head>
+
+<body>
+
+  <div class="container one-column page-post-detail">
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        
+  
+  
+      
+        
+      
+      
+  
+  
+
+
+
+  <ul id="menu" class="menu">
+     
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-about">
+        <a href="/about">
+          <i class="menu-item-icon icon-about"></i> <br />
+          关于
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              「译」- 使用Webpack更加智能的预编译CSS
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-06-15
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/开发者工具/">开发者工具</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/smarter-css-builds-with-webpack/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="smarter-css-builds-with-webpack/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <blockquote>
+<p>原文：<a href="http://bensmithett.com/smarter-css-builds-with-webpack/" target="_blank" rel="external">Smarter CSS builds with Webpack</a></p>
+</blockquote>
+<h2 id="现在应该没人会把所有样式都写入一个超大的CSS里面了吧…">现在应该没人会把所有样式都写入一个超大的CSS里面了吧…</h2><p>作为一个常常写CSS的开发人员，如果你接触过<a href="https://smacss.com/" target="_blank" rel="external">SMACSS</a>、<a href="https://suitcss.github.io/" target="_blank" rel="external">SUIT</a>或<a href="https://en.bem.info/method/definitions/" target="_blank" rel="external">BEM</a>的话，应该会自然而然的将文件拆成更小更分散的模块。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stylesheets/&#10;  config/&#10;    colors.sass&#10;    media_queries.sass&#10;  modules/&#10;    btn.sass&#10;    dropdown.sass&#10;    header.sass&#10;  utilities/&#10;    align.sass&#10;    clearfix.sass</span><br></pre></td></tr></table></figure>
+<p>当你需要将这些编译成单个文件(如<code>bundle.css</code>)供用户下载时，你不得不一一指定应用需要对的哪些文件。</p>
+<p>如果你使用入住Sass的预处理器，你可能会用到 <code>@import</code> 语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@import &#34;vendor/normalize&#34;&#10;&#10;@import &#34;config/colors&#34;&#10;@import &#34;config/media_queries&#34;&#10;&#10;@import &#34;modules/btn&#34;&#10;@import &#34;modules/dropdown&#34;&#10;@import &#34;modules/header&#34;&#10;&#10;@import &#34;utilities/align&#34;&#10;@import &#34;utilities/clearfix&#34;</span><br></pre></td></tr></table></figure>
+<p>如果你使用过 <a href="http://guides.rubyonrails.org/asset_pipeline.html" target="_blank" rel="external">Rail</a> 或 <a href="https://middlemanapp.com/" target="_blank" rel="external">Middleman</a>，你一定对 <a href="https://github.com/sstephenson/sprockets#managing-and-bundling-dependencies" target="_blank" rel="external">Sprockets</a> 的 <code>//= require</code> 语句不陌生:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//= require vendor/normalize&#10;//= require_tree ./modules&#10;//= require_tree ./utilities</span><br></pre></td></tr></table></figure>
+<p>亦或可能你有自己的一套流水线，使用<a href="http://gulpjs.com/" target="_blank" rel="external">Gulp</a>或<a href="http://gruntjs.com/" target="_blank" rel="external">Grunt</a>去收集、处理与合并这些单独的文件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gulp.task(<span class="string">'styles'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  gulp.src(<span class="string">'styles/**/*.scss'</span>)</span><br><span class="line">    .pipe(sass())</span><br><span class="line">    .pipe(gulp.dest(<span class="string">'./tmp'</span>))</span><br><span class="line">    .pipe(concat(<span class="string">'bundle.css'</span>))</span><br><span class="line">    .pipe(autoprefixer())</span><br><span class="line">    .pipe(gulp.dest(<span class="string">'./build'</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>所有的这些方式都有个前提，就是你需要知道哪些CSS是你的应用真正用到的，你不得不硬着头皮去维护一个无聊的依赖文件依赖表，或是干脆引入一整个目录。</p>
+<p>这样一来，你很有可能引入一些冗余的CSS，而且只能寄托于在偶尔编写HTML模板时候根据标签里的class name来发现并清理它们。（当然这里有一些很棒的工具可以帮到你，如：<a href="http://addyosmani.com/blog/removing-unused-css/" target="_blank" rel="external">uncss</a>）</p>
+<p>你需要在你的HTML头部去维护一份CSS依赖，在我看来，这是个无法忍受的事情。</p>
+<p>不过不用担心，如果你使用Javascript模块来生成HTML，一切将迎刃而解（如果你还没这样做，不如趁早尝试这种来自未来的技术）。</p>
+<h2 id="使用Webpack引入UI依赖">使用Webpack引入UI依赖</h2><p>用<a href="http://webpack.github.io/" target="_blank" rel="external">Webpack</a>处理模块就像在耍瑞士军刀一样，<a href="http://webpack.github.io/docs/motivation.html" target="_blank" rel="external">一切</a>都是为了让你在编写UI模块的时候能够更加精准的引入依赖。</p>
+<p>或许你曾使用过<a href="http://dailyjs.com/2010/10/18/modules/" target="_blank" rel="external">CommonJS规范</a>编写过模块：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var _ = require(&#34;underscore&#34;);&#10;&#10;var findTastiestPizza = function (pizzas) &#123;&#10;  return _.find(pizzas, function (pizza) &#123;&#10;    return pizza === &#34;hawaiian&#34;;&#10;  &#125;);&#10;&#125;;&#10;&#10;module.exports = findTastiestPizza;</span><br></pre></td></tr></table></figure>
+<p>在NodeJS中用CommonJS依赖加载不是什么稀奇事，但是到了浏览器端，因为网络请求是异步的，所以比较麻烦，需要借助SeaJS、requireJS。</p>
+<p>为了让我们的模块能跑在浏览器上，我们得使用Webpack或<a href="http://browserify.org/" target="_blank" rel="external">Browserify</a>来将我们页面的所有依赖都打包成单个文件。</p>
+<p>可是UI组件不仅仅包含JS，还有CSS、图片甚至字体，<a href="http://webpack.github.io/docs/motivation.html#why-only-javascript" target="_blank" rel="external">Webpack认识到了这点</a>，得益于它的<a href="http://webpack.github.io/docs/using-loaders.html" target="_blank" rel="external">loader机制</a>，使<code>require</code>语法强大到能够精准的引用你需要的任何依赖，而不仅仅是一个单纯的JS文件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">"stylesheets/modules/btn"</span>);</span><br><span class="line"><span class="keyword">var</span> img = <span class="built_in">require</span>(<span class="string">"images/default_avatar.png"</span>);</span><br></pre></td></tr></table></figure>
+<p>嗯，让我们回到我们最初的问题，如何使用程序程序更加智能的生成<code>bundle.css</code>，一个基于HTML真正使用到的CSS，脱离之前手工维护列表的苦海。</p>
+<p>所有你需要的做的就是在在所有模板视图声明你的CSS和SASS依赖，和声明JS依赖一样，Webpack将生成最终你需要的所有内容，当然，如果需要，还可以对内容进行预先处理或后置加工。</p>
+<p>举个栗子，为我们的应用声明一个加载点：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">var</span> React = <span class="built_in">require</span>(<span class="string">"react"</span>);</span><br><span class="line"><span class="keyword">var</span> Header = <span class="built_in">require</span>(<span class="string">"./header"</span>);</span><br><span class="line"><span class="keyword">var</span> Footer = <span class="built_in">require</span>(<span class="string">"./footer"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Page = React.createClass(&#123;</span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="xml"><span class="tag">&lt;<span class="title">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">Header</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">Footer</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">    )</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">React.render(<span class="xml"><span class="tag">&lt;<span class="title">Page</span> /&gt;</span>, document.querySelector("#main"));</span></span><br></pre></td></tr></table></figure>
+<p>…而那些引入的子模块，它们自身声明了自己所需的SASS依赖…</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// header.js</span></span><br><span class="line"><span class="keyword">var</span> React = <span class="built_in">require</span>(<span class="string">"react"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">require</span>(<span class="string">"stylesheets/modules/header"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Header = React.createClass(&#123;</span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">className</span>=<span class="value">"header"</span>&gt;</span></span><br><span class="line">        Header</span><br><span class="line">      <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">    )</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = Header;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// footer.js</span></span><br><span class="line"><span class="keyword">var</span> React = <span class="built_in">require</span>(<span class="string">"react"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">require</span>(<span class="string">"stylesheets/modules/footer"</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">"stylesheets/utilities/clearfix"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Footer = React.createClass(&#123;</span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">className</span>=<span class="value">"footer u-clearfix"</span>&gt;</span></span><br><span class="line">        Footer</span><br><span class="line">      <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">    )</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = Footer;</span><br></pre></td></tr></table></figure>
+<p>…Webpack 最终将生成的像下面这样的CSS文件</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.header</span> <span class="rules">&#123; <span class="comment">/* ... */</span> &#125;</span></span><br><span class="line"><span class="class">.footer</span> <span class="rules">&#123; <span class="comment">/* ... */</span> &#125;</span></span><br><span class="line"><span class="class">.u-clearfix</span> <span class="rules">&#123; <span class="comment">/* ... */</span> &#125;</span></span><br></pre></td></tr></table></figure>
+<p>你看，是不是很神奇！</p>
+<h2 id="其它的一些秘密">其它的一些秘密</h2><h3 id="不再依赖代码书写顺序">不再依赖代码书写顺序</h3><p>值得注意的是，使用这种方式你将无法像手动模式那样组织代码顺序，Webpack将以你指定的<code>require</code>顺序生成代码，就像叠叠乐一样。</p>
+<p>所以当我们改变 <code>header</code>和<code>footer</code> 模块的依赖顺序…</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">var</span> Footer = <span class="built_in">require</span>(<span class="string">"footer"</span>);</span><br><span class="line"><span class="keyword">var</span> Header = <span class="built_in">require</span>(<span class="string">"header"</span>);</span><br></pre></td></tr></table></figure>
+<p>footer 模块的依赖的样式内容，以及footer中包含的.u-clearfix样式（clearfix），将首先生成出来：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.footer</span> <span class="rules">&#123; <span class="comment">/* ... */</span> &#125;</span></span><br><span class="line"><span class="class">.u-clearfix</span> <span class="rules">&#123; <span class="comment">/* ... */</span> &#125;</span></span><br><span class="line"><span class="class">.header</span> <span class="rules">&#123; <span class="comment">/* ... */</span> &#125;</span></span><br></pre></td></tr></table></figure>
+<p>通常我们在手工维护一个CSS依赖列表时候会根据不同功能类型来进行特定排序，如：</p>
+<ul>
+<li>base</li>
+<li>modules</li>
+<li>utilities</li>
+</ul>
+<p>这些顺序确保了样式间的相互覆写正常。</p>
+<p>现在，你无法继续依赖手工排序了，所以你必须更加谨慎的书写你的样式。</p>
+<p>我就从来都不喜欢被代码顺序牵着走，我通常会避免在不同的文件中声明相同一个HTML元素的样式，但是有些特殊情况会出现在几个class中都声明了相同的样式属性，不得已的时候你可能会写成这样：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"footer u-clearfix"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这个例子中你需要对这些选择器的处理非常小心才行，SUIT <a href="https://github.com/suitcss/utils#usage" target="_blank" rel="external">推荐使用 !important</a> 来处理这种情况，或者你可以试试这种<a href="http://csswizardry.com/2014/07/hacks-for-dealing-with-specificity/#safely-increasing-specificity" target="_blank" rel="external">多重指定class的HACK方式</a>来提高优先级。</p>
+<h3 id="关于SASS全局声明">关于SASS全局声明</h3><p>如果你使用SASS的<code>@import</code>处理你的样式，你可能还需要在各个模块共享你的变量和mixin声明，那么你可能会写过这样的代码：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="at_rule">@<span class="keyword">import</span> <span class="string">"config/variables"</span></span><br><span class="line">@import <span class="string">"mixins/vertical_align"</span></span><br><span class="line"></span><br><span class="line">@import <span class="string">"modules/header"</span></span><br><span class="line">@import <span class="string">"modules/footer"</span></span></span><br></pre></td></tr></table></figure>
+<p>这样一来跟随在后面的模块都可以共享到config和mixins的内容。</p>
+<p>在Webpack的世界里，每一个sass文件都是隔离编译的，<a href="http://blog.teamtreehouse.com/tale-front-end-sanity-beware-sass-import" target="_blank" rel="external">这不无道理</a>，但我觉得有个好的办法来处理这种事情，那就是在你需要引入变量和mixins的地方手动引入它们：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// header.sass</span><br><span class="line">@import "config/colors"</span><br><span class="line"></span><br><span class="line">.header</span><br><span class="line">  color: $red</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// footer.sass</span><br><span class="line">@import "config/colors"</span><br><span class="line"></span><br><span class="line">.footer</span><br><span class="line">  color: $blue</span><br></pre></td></tr></table></figure>
+<p>各文件明确指定了自己要的依赖，在我看来，非常轻巧，非常棒！</p>
+<h2 id="最最有价值的留在最后">最最有价值的留在最后</h2><p>我在Github上创建了一个<a href="https://github.com/bensmithett/webpack-css-example" target="_blank" rel="external">例子</a>供大家把玩，当然别忘了Star一下我 :)</p>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSS，预编译，翻译/"> #CSS，预编译，翻译 </a>
+          
+            <a href="/tags/webpack/"> #webpack </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/local-your-evernote/">一只不会动的大象 - 如何把你的印象笔记变成本地版。</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+      <div class="comments" id="comments">
+        
+          <div class="ds-thread" data-thread-key="smarter-css-builds-with-webpack/"
+               data-title="「译」- 使用Webpack更加智能的预编译CSS" data-url="http://blog.xunuo.com/smarter-css-builds-with-webpack/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+      </div>
+
+      
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        
+  
+  
+  
+  
+
+
+
+
+
+
+<a href="https://github.com/xunuo">My Github</a> | <a href="atom.xml">RSS</a>
+
+
+ 
+      </div>
+    </div> 
+
+    
+  </div>
+
+  
+
+  
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"xunuo"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+</body>
+</html>
