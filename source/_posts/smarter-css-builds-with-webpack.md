@@ -3,9 +3,14 @@ category: 开发者工具
 tags: [webpack, CSS，预编译，翻译]
 ---
 
+现在应该没人会把所有样式都写入一个超大的CSS里面了吧...
+
 > 原文：[Smarter CSS builds with Webpack](http://bensmithett.com/smarter-css-builds-with-webpack/)
 
-## 现在应该没人会把所有样式都写入一个超大的CSS里面了吧...
+<!--more-->
+
+---
+
 
 作为一个常常写CSS的开发人员，如果你接触过[SMACSS](https://smacss.com/)、[SUIT](https://suitcss.github.io/)或[BEM](https://en.bem.info/method/definitions/)的话，应该会自然而然的将文件拆成更小更分散的模块。
 
