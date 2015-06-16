@@ -5,7 +5,7 @@
   <subtitle><![CDATA[许诺]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.xunuo.com//"/>
-  <updated>2015-06-16T02:39:14.000Z</updated>
+  <updated>2015-06-16T02:56:23.000Z</updated>
   <id>http://blog.xunuo.com//</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[「译」- 使用Webpack更加智能的预编译CSS]]></title>
+    <title><![CDATA[「译」- 使用Webpack更加智能的编译CSS]]></title>
     <link href="http://blog.xunuo.com/smarter-css-builds-with-webpack/"/>
     <id>http://blog.xunuo.com/smarter-css-builds-with-webpack/</id>
-    <published>2015-06-16T02:39:14.000Z</published>
-    <updated>2015-06-16T02:39:14.000Z</updated>
+    <published>2015-06-16T02:56:23.000Z</published>
+    <updated>2015-06-16T02:56:23.000Z</updated>
     <content type="html"><![CDATA[<p>现在应该没人会把所有样式都写入一个超大的CSS里面了吧…</p>
 <blockquote>
 <p>原文：<a href="http://bensmithett.com/smarter-css-builds-with-webpack/" target="_blank" rel="external">Smarter CSS builds with Webpack</a></p>
