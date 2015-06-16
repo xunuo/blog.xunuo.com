@@ -28,9 +28,9 @@ stylesheets/
     clearfix.sass
 ```
 
-当你需要将这些编译成单个文件(如`bundle.css`)供用户下载时，你不得不一一指定应用需要对的哪些文件。
+当你需要将这些编译成单个文件(如`bundle.css`)供用户下载时，你不得不手工指定应用需要哪些文件。
 
-如果你使用入住Sass的预处理器，你可能会用到 `@import` 语法：
+在SASS中，`@import`也许是这样的：
 
 ```
 @import "vendor/normalize"
@@ -54,7 +54,7 @@ stylesheets/
 //= require_tree ./utilities
 ```
 
-亦或可能你有自己的一套流水线，使用[Gulp](http://gulpjs.com/)或[Grunt](http://gruntjs.com/)去收集、处理与合并这些单独的文件：
+或者可能你有自己的一套流水线，使用[Gulp](http://gulpjs.com/)或[Grunt](http://gruntjs.com/)去收集、处理与合并这些单独的文件：
 
 ```javascript
 gulp.task('styles', function () {
