@@ -5,7 +5,7 @@
   <subtitle><![CDATA[许诺]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.xunuo.com//"/>
-  <updated>2015-06-15T16:44:12.000Z</updated>
+  <updated>2015-06-16T02:39:14.000Z</updated>
   <id>http://blog.xunuo.com//</id>
   
   <author>
@@ -19,8 +19,8 @@
     <title><![CDATA[「译」- 使用Webpack更加智能的预编译CSS]]></title>
     <link href="http://blog.xunuo.com/smarter-css-builds-with-webpack/"/>
     <id>http://blog.xunuo.com/smarter-css-builds-with-webpack/</id>
-    <published>2015-06-15T16:44:12.000Z</published>
-    <updated>2015-06-15T16:44:12.000Z</updated>
+    <published>2015-06-16T02:39:14.000Z</published>
+    <updated>2015-06-16T02:39:14.000Z</updated>
     <content type="html"><![CDATA[<p>现在应该没人会把所有样式都写入一个超大的CSS里面了吧…</p>
 <blockquote>
 <p>原文：<a href="http://bensmithett.com/smarter-css-builds-with-webpack/" target="_blank" rel="external">Smarter CSS builds with Webpack</a></p>
@@ -29,12 +29,12 @@
 <hr>
 <p>作为一个常常写CSS的开发人员，如果你接触过<a href="https://smacss.com/" target="_blank" rel="external">SMACSS</a>、<a href="https://suitcss.github.io/" target="_blank" rel="external">SUIT</a>或<a href="https://en.bem.info/method/definitions/" target="_blank" rel="external">BEM</a>的话，应该会自然而然的将文件拆成更小更分散的模块。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stylesheets/&#10;  config/&#10;    colors.sass&#10;    media_queries.sass&#10;  modules/&#10;    btn.sass&#10;    dropdown.sass&#10;    header.sass&#10;  utilities/&#10;    align.sass&#10;    clearfix.sass</span><br></pre></td></tr></table></figure>
-<p>当你需要将这些编译成单个文件(如<code>bundle.css</code>)供用户下载时，你不得不一一指定应用需要对的哪些文件。</p>
-<p>如果你使用入住Sass的预处理器，你可能会用到 <code>@import</code> 语法：</p>
+<p>当你需要将这些编译成单个文件(如<code>bundle.css</code>)供用户下载时，你不得不手工指定应用需要哪些文件。</p>
+<p>在SASS中，<code>@import</code>也许是这样的：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@import &#34;vendor/normalize&#34;&#10;&#10;@import &#34;config/colors&#34;&#10;@import &#34;config/media_queries&#34;&#10;&#10;@import &#34;modules/btn&#34;&#10;@import &#34;modules/dropdown&#34;&#10;@import &#34;modules/header&#34;&#10;&#10;@import &#34;utilities/align&#34;&#10;@import &#34;utilities/clearfix&#34;</span><br></pre></td></tr></table></figure>
 <p>如果你使用过 <a href="http://guides.rubyonrails.org/asset_pipeline.html" target="_blank" rel="external">Rail</a> 或 <a href="https://middlemanapp.com/" target="_blank" rel="external">Middleman</a>，你一定对 <a href="https://github.com/sstephenson/sprockets#managing-and-bundling-dependencies" target="_blank" rel="external">Sprockets</a> 的 <code>//= require</code> 语句不陌生:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//= require vendor/normalize&#10;//= require_tree ./modules&#10;//= require_tree ./utilities</span><br></pre></td></tr></table></figure>
-<p>亦或可能你有自己的一套流水线，使用<a href="http://gulpjs.com/" target="_blank" rel="external">Gulp</a>或<a href="http://gruntjs.com/" target="_blank" rel="external">Grunt</a>去收集、处理与合并这些单独的文件：</p>
+<p>或者可能你有自己的一套流水线，使用<a href="http://gulpjs.com/" target="_blank" rel="external">Gulp</a>或<a href="http://gruntjs.com/" target="_blank" rel="external">Grunt</a>去收集、处理与合并这些单独的文件：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gulp.task(<span class="string">'styles'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  gulp.src(<span class="string">'styles/**/*.scss'</span>)</span><br><span class="line">    .pipe(sass())</span><br><span class="line">    .pipe(gulp.dest(<span class="string">'./tmp'</span>))</span><br><span class="line">    .pipe(concat(<span class="string">'bundle.css'</span>))</span><br><span class="line">    .pipe(autoprefixer())</span><br><span class="line">    .pipe(gulp.dest(<span class="string">'./build'</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>所有的这些方式都有个前提，就是你需要知道哪些CSS是你的应用真正用到的，你不得不硬着头皮去维护一个无聊的依赖文件依赖表，或是干脆引入一整个目录。</p>
 <p>这样一来，你很有可能引入一些冗余的CSS，而且只能寄托于在偶尔编写HTML模板时候根据标签里的class name来发现并清理它们。（当然这里有一些很棒的工具可以帮到你，如：<a href="http://addyosmani.com/blog/removing-unused-css/" target="_blank" rel="external">uncss</a>）</p>
