@@ -1,4 +1,4 @@
-title: 「译」- 使用Webpack更加智能的预编译CSS
+title: 「译」- 使用Webpack更加智能的编译CSS
 category: 开发者工具
 tags: [webpack, CSS，预编译，翻译]
 ---
