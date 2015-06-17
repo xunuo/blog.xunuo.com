@@ -258,4 +258,10 @@ footer 模块的依赖的样式内容，以及footer中包含的.u-clearfix样�
 
 ## 最最有价值的留在最后
 
-我在Github上创建了一个[例子](https://github.com/bensmithett/webpack-css-example)供大家把玩，当然别忘了Star一下我 :)
+我在Github上创建了一个[例子](https://github.com/bensmithett/webpack-css-example)供大家把玩，当然别忘了Star一下 :)
+
+---
+
+## 译文之外
+
+还有一篇不错的 [Webpack for react](http://christianalfoni.github.io/react-webpack-cookbook/index.html) 的book，其中也有关于sass、less的相关配置，可以参考一下 :)
