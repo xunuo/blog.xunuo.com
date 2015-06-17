@@ -695,7 +695,7 @@ td {
   margin: 20px 0;
   padding: 15px;
   overflow: auto;
-  font-size: 13px;
+  font-size: 16px;
   color: #4d4d4c;
   line-height: 1.8;
 }
@@ -1140,7 +1140,7 @@ input.menu-search-input {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #a88eb1;
+  background: #7fd4ba;
 }
 .sidebar-nav {
   margin: 0;
