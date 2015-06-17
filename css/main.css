@@ -705,7 +705,7 @@ td {
 }
 .post pre,
 .post code {
-  font-family: "PT Mono", Consolas, Monaco, Menlo, monospace;
+  font-family: "Source Code Pro", "Courier New", monospace;
 }
 .post code {
   background: #eee;
@@ -764,7 +764,7 @@ td {
 }
 .post .gist .gist-file {
   border: none;
-  font-family: "PT Mono", Consolas, Monaco, Menlo, monospace;
+  font-family: "Source Code Pro", "Courier New", monospace;
   margin: 0;
 }
 .post .gist .gist-file .gist-data {
@@ -1140,7 +1140,7 @@ input.menu-search-input {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #d6bd24;
+  background: #3cf2b9;
 }
 .sidebar-nav {
   margin: 0;
