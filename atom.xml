@@ -5,7 +5,7 @@
   <subtitle><![CDATA[许诺]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.xunuo.com//"/>
-  <updated>2015-06-17T20:32:20.000Z</updated>
+  <updated>2015-06-17T20:36:00.000Z</updated>
   <id>http://blog.xunuo.com//</id>
   
   <author>
@@ -19,8 +19,8 @@
     <title><![CDATA[「译」- 使用Webpack更加智能的编译CSS]]></title>
     <link href="http://blog.xunuo.com/smarter-css-builds-with-webpack/"/>
     <id>http://blog.xunuo.com/smarter-css-builds-with-webpack/</id>
-    <published>2015-06-17T20:32:20.000Z</published>
-    <updated>2015-06-17T20:32:20.000Z</updated>
+    <published>2015-06-17T20:36:00.000Z</published>
+    <updated>2015-06-17T20:36:00.000Z</updated>
     <content type="html"><![CDATA[<p>现在应该没人会把所有样式都写入一个超大的CSS里面了吧…</p>
 <blockquote>
 <p>原文：<a href="http://bensmithett.com/smarter-css-builds-with-webpack/" target="_blank" rel="external">Smarter CSS builds with Webpack</a></p>
@@ -47,8 +47,8 @@
 <p>为了让我们的模块能跑在浏览器上，我们得使用Webpack或<a href="http://browserify.org/" target="_blank" rel="external">Browserify</a>来将我们页面的所有依赖都打包成单个文件。</p>
 <p>可是UI组件不仅仅包含JS，还有CSS、图片甚至字体，<a href="http://webpack.github.io/docs/motivation.html#why-only-javascript" target="_blank" rel="external">Webpack认识到了这点</a>，得益于它的<a href="http://webpack.github.io/docs/using-loaders.html" target="_blank" rel="external">loader机制</a>，使<code>require</code>语法强大到能够精准的引用你需要的任何依赖，而不仅仅是一个单纯的JS文件：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">"stylesheets/modules/btn"</span>);</span><br><span class="line"><span class="keyword">var</span> img = <span class="built_in">require</span>(<span class="string">"images/default_avatar.png"</span>);</span><br></pre></td></tr></table></figure>
-<p>嗯，让我们回到我们最初的问题，如何使用程序程序更加智能的生成<code>bundle.css</code>，一个基于HTML真正使用到的CSS，脱离之前手工维护列表的苦海。</p>
-<p>所有你需要的做的就是在在所有模板视图声明你的CSS和SASS依赖，和声明JS依赖一样，Webpack将生成最终你需要的所有内容，当然，如果需要，还可以对内容进行预先处理或后置加工。</p>
+<p>嗯，让我们回到我们最初的问题，如何使用程序更加智能的生成<code>bundle.css</code>，一个基于HTML真正使用到的CSS，脱离之前手工维护列表的苦海。</p>
+<p>所有你需要的做的就是在所有的模板视图中声明你的CSS和SASS依赖，就和声明JS依赖一样，Webpack将生成最终你需要的所有内容，当然，如果需要，还可以对内容进行预先处理或后置加工。</p>
 <p>举个栗子，为我们的应用声明一个加载点：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">var</span> React = <span class="built_in">require</span>(<span class="string">"react"</span>);</span><br><span class="line"><span class="keyword">var</span> Header = <span class="built_in">require</span>(<span class="string">"./header"</span>);</span><br><span class="line"><span class="keyword">var</span> Footer = <span class="built_in">require</span>(<span class="string">"./footer"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Page = React.createClass(&#123;</span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="xml"><span class="tag">&lt;<span class="title">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">Header</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">Footer</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">    )</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">React.render(<span class="xml"><span class="tag">&lt;<span class="title">Page</span> /&gt;</span>, document.querySelector("#main"));</span></span><br></pre></td></tr></table></figure>
 <p>…而那些引入的子模块，它们自身声明了自己所需的SASS依赖…</p>
