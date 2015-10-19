@@ -75,13 +75,13 @@ gulp.task('PP',shell.task([
   
   'hexo clean',
     
-  'echo "正在推送到 Gitcafe Pages ..."',
-  'hexo d -g' + cnConfigString,
-  'echo "成功推送到 Gitcafe Pages。"',
-    
-  'echo "PUSH变更到仓库..."',
-  'git add . && git commit -a -m "update" && git push',
-  'echo "PUSH成功。"',
+  //'echo "正在推送到 Gitcafe Pages ..."',
+  //'hexo d -g' + cnConfigString,
+  //'echo "成功推送到 Gitcafe Pages。"',
+  //  
+  //'echo "PUSH变更到仓库..."',
+  //'git add . && git commit -a -m "update" && git push',
+  //'echo "PUSH成功。"',
     
   // 取消设置全局 git config
   'git config --unset --global user.name',
