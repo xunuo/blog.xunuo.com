@@ -87,7 +87,7 @@ gulp.task('PP',shell.task([
   'git config --unset --global user.name',
   'git config --unset --global user.email',
   'git config --global user.name "nuo.xun"',
-  'git config --global user.email "nuo.xun@alibaba-inc.com"'
+  // 'git config --global user.email "nuo.xun@xxx.com"'
     
 ]))
 
