@@ -39,3 +39,7 @@
   {% include '_scripts/pages/post-details.swig' %}
 {% endblock %}
 
+{% block comment_system %}
+  {% include '_scripts/comments/duoshuo.swig' %}
+  {% include '_scripts/comments/disqus.swig' %}
+{% endblock %}
